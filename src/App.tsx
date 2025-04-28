@@ -1,25 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter } from 'react-router-dom';
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import AppRouter from './components/AppRouter';
+import { VulnerabilityProvider } from './contexts/VulnerabilityContext';
 import './App.css';
+
+// Create a theme
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#2e7d32', // Green for security
+    },
+    secondary: {
+      main: '#5c6bc0', // Indigo for AI 
+    },
+    background: {
+      default: '#f5f5f5',
+    },
+  },
+  typography: {
+    fontFamily: [
+      'Roboto',
+      'Arial',
+      'sans-serif'
+    ].join(','),
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <VulnerabilityProvider>
+          <AppRouter />
+        </VulnerabilityProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
